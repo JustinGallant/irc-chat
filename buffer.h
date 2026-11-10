@@ -4,25 +4,21 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdatomic.h>
+#include <time.h>
 
 #define BUFFER_SIZE 3
 #define MESSAGE_SIZE 512
 
-// User structure
-struct Sender {
-    size_t sender_id;
-    char* username;
-};
-
 // Message structure
-struct Messages {
-    char message[MESSAGE_SIZE];
-    struct Sender sender;
+struct Message {
+    char content[MESSAGE_SIZE];
+    size_t sender_id;
+    time_t timestamp;
 };
 
 // Circular buffer
 struct MessageBuffer {
-    struct Messages messages[BUFFER_SIZE];
+    struct Message messages[BUFFER_SIZE];
     int head;
     int count;
 };
